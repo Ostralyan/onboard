@@ -1,3 +1,7 @@
-1. determine OS 
-2. check if git is installed
-3. check if brew is installed
+determine OS 
+check if brew is installed
+check if git is installed
+install nginx
+install java
+install docker
+install nvm

@@ -1,28 +1,29 @@
 package myos
 
+import (
+	"onboard/dependency"
+	"onboard/util"
+)
+
 type MacOS struct {
 }
 
-func (mac MacOS) defaultInstall(dep Dependency) {
-	if !dep.isInstalled() {
-		dep.install()
-	}
+func (macOS MacOS) InstallGit() {
+	git := new(dependency.MacGitDependency)
+	util.DefaultInstall(git)
 }
 
-func (macOS MacOS) installGit() {
-	git := new(MacGitDependency)
-	macOS.defaultInstall(git)
+func (macOS MacOS) InstallAWS() {
+	aws := new(dependency.MacAWSCliDependency)
+	util.DefaultInstall(aws)
 }
 
-func (macOS MacOS) installAWS() {
-	aws := new(MacAWSCliDependency)
-	macOS.defaultInstall(aws)
+func (macOS MacOS) InstallPackageManager() {
+
+	pm := new(dependency.MacPackageManagerDepdendency)
+	util.DefaultInstall(pm)
 }
 
-func (macOS MacOS) installPackageManager() {
-	// /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-}
-
-func (macOS MacOS) preOnboardingSteps() {
+func (macOS MacOS) PreOnboardingSteps() {
 	println("Things that need to get done before installing")
 }
