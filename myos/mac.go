@@ -1,7 +1,7 @@
 package myos
 
 import (
-	"onboard/dependency"
+	mac "onboard/dependency/mac"
 	"onboard/util"
 )
 
@@ -9,18 +9,18 @@ type MacOS struct {
 }
 
 func (macOS MacOS) InstallGit() {
-	git := new(dependency.MacGitDependency)
+	git := new(mac.GitDependency)
 	util.DefaultInstall(git)
 }
 
 func (macOS MacOS) InstallAWS() {
-	aws := new(dependency.MacAWSCliDependency)
+	aws := new(mac.AWSCliDependency)
 	util.DefaultInstall(aws)
 }
 
 func (macOS MacOS) InstallPackageManager() {
 
-	pm := new(dependency.MacPackageManagerDepdendency)
+	pm := new(mac.PackageManagerDepdendency)
 	util.DefaultInstall(pm)
 }
 

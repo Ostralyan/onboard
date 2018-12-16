@@ -5,14 +5,14 @@ import (
 	"os/exec"
 )
 
-type MacPackageManagerDepdendency struct {
+type PackageManagerDepdendency struct {
 }
 
-func (macPMDependency MacPackageManagerDepdendency) Install() {
+func (pm PackageManagerDepdendency) Install() {
 	exec.Command("/usr/bin/ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\"").CombinedOutput()
 }
 
-func (macPMDependency MacPackageManagerDepdendency) IsInstalled() bool {
+func (pm PackageManagerDepdendency) IsInstalled() bool {
 	output, err := exec.Command("which", "brew").CombinedOutput()
 	if err != nil {
 		os.Stderr.WriteString(err.Error())

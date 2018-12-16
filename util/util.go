@@ -1,8 +1,10 @@
 package util
 
-import "onboard/dependency"
+import (
+	dep "onboard/dependency"
+)
 
-func DefaultInstall(dep dependency.Dependency) {
+func DefaultInstall(dep dep.Dependency) {
 	if !dep.IsInstalled() {
 		dep.Install()
 	}

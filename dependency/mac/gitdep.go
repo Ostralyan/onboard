@@ -5,17 +5,17 @@ import (
 	"os/exec"
 )
 
-type MacAWSCliDependency struct {
+type GitDependency struct {
 }
 
-func (aws MacAWSCliDependency) Install() {
-	_, err := exec.Command("brew", "install", "awscli").CombinedOutput()
+func (git GitDependency) Install() {
+	_, err := exec.Command("xcode-select", "--install").CombinedOutput()
 	if err != nil {
 		os.Stderr.WriteString(err.Error())
 	}
 }
 
-func (aws MacAWSCliDependency) IsInstalled() bool {
+func (git GitDependency) IsInstalled() bool {
 	output, err := exec.Command("which", "aws").CombinedOutput()
 	if err != nil {
 		os.Stderr.WriteString(err.Error())
@@ -25,7 +25,7 @@ func (aws MacAWSCliDependency) IsInstalled() bool {
 		exec.Command("brew", "install", "awscli").CombinedOutput()
 		return false
 	} else {
-		println("AWS has already been installed")
+		println("Git has already been installed")
 		return true
 	}
 }
