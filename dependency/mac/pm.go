@@ -1,12 +1,11 @@
-package dependency
+package mac
 
 import (
 	"os"
 	"os/exec"
 )
 
-type PackageManagerDepdendency struct {
-}
+type PackageManagerDepdendency struct{}
 
 func (pm PackageManagerDepdendency) Install() {
 	exec.Command("/usr/bin/ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\"").CombinedOutput()

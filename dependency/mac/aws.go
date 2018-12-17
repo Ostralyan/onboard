@@ -1,14 +1,14 @@
-package dependency
+package mac
 
 import (
 	"os"
 	"os/exec"
 )
 
-type AWSCliDependency struct {
-}
+type AWSCliDependency struct{}
 
 func (aws AWSCliDependency) Install() {
+	println("Installing the AWS command line interface")
 	_, err := exec.Command("brew", "install", "awscli").CombinedOutput()
 	if err != nil {
 		os.Stderr.WriteString(err.Error())
@@ -22,7 +22,6 @@ func (aws AWSCliDependency) IsInstalled() bool {
 	}
 
 	if string(output) == "" {
-		exec.Command("brew", "install", "awscli").CombinedOutput()
 		return false
 	} else {
 		println("AWS has already been installed")

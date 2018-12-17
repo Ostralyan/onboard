@@ -1,75 +1,5 @@
 #!/usr/bin/env bash
 
-RED='\033[0;31m'
-NC='\033[0m'
-
-
-DEV_DIR="$HOME/dev"
-
-###########################################################################
-## These are the things that can be done prior to the engineer's arrival ##
-###########################################################################
-
-while true; do
-    read -p "Which operating system are you using [MAC/UBUNTU]" yn
-    case $yn in
-        [MAC]* ) OS="MAC"; break;;
-        [UBUNTU]* ) OS="UBUNTU"; break;;
-        * ) echo "Please answer MAC or UBUNTU. If you are using Windows... I feel so bad for you.";;
-    esac
-done
-
-echo "Detected Operating System: $OS";
-
-WHICH_GIT=$(which git)
-
-DOCKER_CMD="docker";
-
-# Prompt user to manually install brew
-echo -n "Checking if git installed... ";
-
-if [ -z "$WHICH_GIT" ]; then
-
-    # Install Git for MAC
-    if [ "$OS" == "MAC" ]; then
-        echo "Installing command line tools... ";
-        xcode-select --install
-        if [ $? -ne 0 ]; then
-            echo "Please click \"Install\" when prompted and rerun the script";
-            exit 1;
-        fi
-    fi
-
-fi
-echo "Success";
-
-WHICH_BREW=$(which brew)
-if [ -z "$WHICH_BREW" ]; then
-
-    # Install Brew for MAC
-    if [ "$OS" == "MAC" ]; then
-        echo "Installing brew... ";
-        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    fi
-fi
-echo "Success";
-
-brew install awscli
-
-# Install nginx for the user
-WHICH_NGINX=$(which nginx)
-
-echo -n "Checking if nginx installed... "
-if [ -z "$WHICH_NGINX" ]; then
-    echo -e "Installing nginx..."
-
-    # Install nginx for MAC
-    if [ "$OS" == "MAC" ]; then
-        brew install nginx
-    fi
-fi
-echo "Success";
-
 # Prompt user to manually install java
 echo -n "Checking if java installed... ";
 
@@ -87,7 +17,6 @@ echo "Success";
 
 WHICH_DOCKER=$(which docker)
 
-# Prompt user to manually install brew
 echo -n "Checking if docker installed... ";
 
 $DOCKER_CMD ps && DOCKER_RUNNING=true || DOCKER_RUNNING=false
@@ -321,14 +250,6 @@ if [ "$OS" == "MAC" ]; then
     # Starting Nginx
     echo "Starting Nginx"
     launchctl load ~/Library/LaunchAgents/homebrew.mxcl.nginx.plist
-fi
-
-COMPUTER_LANG=$(echo $LANG);
-WANTED_LANG=en_US.UTF-8;
-
-if [ "$COMPUTER_LANG" != "$WANTED_LANG" ]; then
-    echo "Change your \$LANG to be $WANTED_LANG";
-    echo "Found $COMPUTER_LANG";
 fi
 
 # Build Java

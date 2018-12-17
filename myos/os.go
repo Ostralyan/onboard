@@ -5,4 +5,5 @@ type OperatingSystem interface {
 	InstallPackageManager()
 	InstallGit()
 	InstallAWS()
+	InstallNginx()
 }
